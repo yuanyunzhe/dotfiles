@@ -1,0 +1,2 @@
+DISABLE_CORRECTION="true"
+setopt NO_CASE_GLOB

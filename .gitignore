@@ -1,0 +1,13 @@
+.DS_Store
+*.swp
+*.swo
+*.zwc
+.zcompdump*
+
+# Keep secrets and machine-local overrides out of the public repo.
+**/*_private/**
+**/*.local
+**/local.zsh
+**/local.sh
+**/local.bash
+**/secrets.sh
