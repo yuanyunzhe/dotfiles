@@ -1,5 +1,5 @@
 export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
-ZSH_THEME="${ZSH_THEME:-powerlevel10k/powerlevel10k}"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 zstyle ':omz:plugins:eza' 'dirs-first' yes
 zstyle ':omz:plugins:eza' 'git-status' yes

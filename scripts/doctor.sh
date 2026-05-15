@@ -91,6 +91,14 @@ else
   warn "powerlevel10k theme is not installed under $omz_custom/themes"
 fi
 
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+  if [[ -d "$omz_custom/plugins/$plugin" ]]; then
+    ok "$plugin plugin is installed"
+  else
+    warn "$plugin plugin is not installed under $omz_custom/plugins"
+  fi
+done
+
 if command -v tmux >/dev/null 2>&1; then
   if [[ -r "$HOME/.tmux/plugins/tpm/tpm" ]]; then
     ok "tmux plugin manager is installed"
