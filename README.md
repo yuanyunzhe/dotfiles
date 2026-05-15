@@ -19,11 +19,48 @@ zsh/       zsh + oh-my-zsh + Powerlevel10k configuration
 
 ## New Machine Bootstrap
 
-Install the baseline tools first. Package names vary by distribution, but the
-expected commands are:
+Start with the smallest required set:
 
 ```text
-curl stow zsh tmux git gh git-lfs fzf zoxide eza direnv uv
+git stow zsh tmux curl
+```
+
+Everything else is an enhancement checked by `./scripts/doctor.sh`.
+
+### With Sudo
+
+On Ubuntu/Debian:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y curl git stow zsh tmux git-lfs fzf direnv
+sudo apt-get install -y gh zoxide eza
+```
+
+If `gh`, `zoxide`, or `eza` is not available in your distribution repository,
+skip it for now and rerun `./scripts/doctor.sh` after installing the rest.
+
+### Without Sudo
+
+If you do not have sudo, use a user-level package manager when available:
+
+```bash
+mamba install -c conda-forge gh git-lfs fzf zoxide eza direnv
+```
+
+or:
+
+```bash
+conda install -c conda-forge gh git-lfs fzf zoxide eza direnv
+```
+
+If neither sudo nor conda/mamba is available, continue with the required pieces
+below and let `./scripts/doctor.sh` report the remaining optional tools.
+
+Install `uv` with the official standalone installer:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 Install oh-my-zsh and the Powerlevel10k theme before opening a zsh session with
@@ -80,11 +117,33 @@ For a direct Stow run without backup handling:
 `scripts/install.sh` also bootstraps TPM and installs the tmux plugins declared
 in `.tmux.conf`.
 
+After activation, open a new shell or run:
+
+```bash
+source ~/.zshrc
+```
+
+Then rerun:
+
+```bash
+./scripts/doctor.sh
+```
+
 ## Packages
 
 This repository uses GNU Stow to link files into `$HOME`. There is no `stow/`
 package in this repo; `.stowrc` is only local configuration for commands run
 from the repository root.
+
+On a new machine, prefer:
+
+```bash
+./scripts/activate.sh
+```
+
+It backs up existing files such as `~/.zshrc` and `~/.bashrc` before running
+Stow. Use direct `stow` commands only when the target files do not exist or are
+already symlinks owned by this repository.
 
 ```bash
 stow shell
